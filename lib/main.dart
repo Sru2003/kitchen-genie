@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:kitchen_genie/inputpage.dart';
-import 'package:kitchen_genie/recipe_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
