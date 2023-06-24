@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
             height: 200,
             child: Center(
               child: Text(
-                'Welcome to Kitchen Genie!\n\nThis app helps you generate recipes based on the ingredients you have. Get started by tapping the button below!',
+                'Welcome to Kitchen Genie!\n\nYour culinary companion that transforms ingredients into nourishing meals. With a few taps, unlock personalized recipes tailored to your pantry, tackling food insecurity and minimizing waste. Let Kitchen Genie grant your culinary wishes for a more sustainable and inclusive food future!',
                 style: TextStyle(
                   fontSize: 16,
                   color: myColor,
@@ -63,9 +63,13 @@ class HomePage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => ChatGPTScreen()),
               );
             },
-            child: Text('Get Started'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: myColor2,
+              ),
+            child: Text('Get Started',style: TextStyle(color: myColor),
           ),
-        ],
+
+          )],
       ),
     );
   }
