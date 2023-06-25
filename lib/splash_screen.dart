@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:kitchen_genie/inputpage.dart';
-import 'package:kitchen_genie/recipe_page.dart';
+
 class VideoPlayerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
