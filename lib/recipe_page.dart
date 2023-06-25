@@ -12,7 +12,8 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
   final List<Message> _messages = [];
 
   final TextEditingController _textEditingController = TextEditingController();
-
+  late AnimationController _animationController;
+  late Animation<Offset> _animation;
   void onSendMessage() async {
     Message message = Message(text: _textEditingController.text, isMe: true);
 
@@ -66,48 +67,56 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
     Color myColor2 = Color(0xFF39FF02);
     Color myColor3 = Color(0xFFFFCC00);
 
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10.0),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        child: Column(
-          crossAxisAlignment: message.isMe
-              ? CrossAxisAlignment.end
-              : CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              message.isMe ? 'Ingredients' : 'Recipe',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: myColor,
-              ),
-            ),
-            SizedBox(height: 5),
-            Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: message.isMe ? myColor2 : myColor3,
-                    blurRadius: 15,
-                    spreadRadius: 1,
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (BuildContext context, Widget? child) {
+        return SlideTransition(
+          position: _animation,
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 10.0),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              child: Column(
+                crossAxisAlignment: message.isMe
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    message.isMe ? 'Ingredients' : 'Recipe',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: myColor,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: message.isMe ? myColor2 : myColor3,
+                          blurRadius: 15,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                      color: message.isMe ? myColor2 : myColor3,
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    child: Text(
+                      message.text,
+                      style: TextStyle(
+                        color: myColor,
+                        fontWeight:
+                        message.isMe ? FontWeight.normal : FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
-                borderRadius: BorderRadius.circular(10),
-                color: message.isMe ? myColor2 : myColor3,
-              ),
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              child: Text(
-                message.text,
-                style: TextStyle(
-                  color: myColor,
-                  fontWeight:
-                  message.isMe ? FontWeight.normal : FontWeight.bold,
-                ),
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
