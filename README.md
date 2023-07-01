@@ -1,6 +1,12 @@
 # kitchen_genie
 
-A new Flutter project.
+A new Flutter project.Kitchen Genie is a revolutionary mobile app that transforms the cooking experience for individuals with limited ingredients. With its intuitive interface, the app empowers users, including students and professionals, to create nutritious and delicious recipes. By providing accessible, affordable, and enjoyable cooking solutions, Kitchen Genie aims to alleviate food insecurity.
+
+Key Features:
+
+1)Smart Ingredient Search: Users can discover recipes based on the ingredients they have available, thanks to our powerful search engine.
+
+2)Step-by-Step Instructions: The app provides clear and easy-to-follow instructions, ensuring that even novice cooks can prepare delightful meals.
 
 ## Getting Started
 
