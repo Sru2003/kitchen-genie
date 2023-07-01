@@ -1,82 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 import 'package:kitchen_genie/inputpage.dart';
 import 'package:kitchen_genie/recipe_page.dart';
-class VideoPlayerApp extends StatelessWidget {
+
+class SplashScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Video Player Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: VideoPlayerScreen(),
-    );
-  }
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class VideoPlayerScreen extends StatefulWidget {
-  @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
-}
-
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late VideoPlayerController _controller;
-  late Future<void> _initializeVideoPlayerFuture;
-
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-      'videos/splash.mp4',
-    );
-    _initializeVideoPlayerFuture = _controller.initialize().then((_) {
-      setState(() {
-        _controller.play();
-      });
-    });
+    navigateToHomePage();
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  void navigateToHomePage() async {
+    await Future.delayed(Duration(seconds: 2)); // Display image for 1 second
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    Color myColor = Color(0xFF39FF02);
+
     return Scaffold(
-      body: Stack(
-        children: [
-          VideoPlayer(_controller),
-          FutureBuilder(
-            future: _initializeVideoPlayerFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return SizedBox.shrink();
-              } else {
-                return Center(child: CircularProgressIndicator());
-              }
-            },
-          ),
-        ],
+      body: Container(
+        color: myColor,
+        child: Image.asset(
+          'assets/image/splash_screen.gif', // Replace with your image asset
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+        ),
       ),
     );
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _controller.addListener(() {
-      if (_controller.value.position == _controller.value.duration) {
-        Future.delayed(Duration(seconds: 1), () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-        });
-      }
-    });
-  }
 }
